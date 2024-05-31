@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Нумерология</title>
+    <style>
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 200px;
+        border: 1px black solid;
+        border-radius: 10px;
+        background-color: #deb887;
+        padding: 30px 0;
+        margin-bottom: 20px;
+      }
+      .title-form {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .select-input,
+      .text-input {
+        color: #333;
+        border-radius: 6px;
+        font-size: 18px;
+        padding: 6px 8px 6px 4px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+      }
+      .form-button {
+        border-radius: 6px;
+        font-size: 15px;
+        padding: 10px 15px;
+        border: none;
+        background-color: #f8f8f8;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .result-luck,
+      .result-financial {
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .error-message {
+        font-size: 14px;
+        color: #750415;
+        margin-top: 10px;
+      }
+      @media (max-width: 550px) {
+        .form-container {
+          padding: 25px;
+        }
+        .text-input {
+          width: 79%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Персональный Финансовый Код -->
+    <form id="financial-form" onsubmit="calculateFinancialCode(event)">
+      <div class="form-container">
+        <div class="title-form">Финансовый код</div>
+        <div>Введите дату рождения:</div>
+        <div class="select-container">
+          <select class="select-input" name="day" id="select_day">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option>День</option>
+          </select>
+          <select class="select-input" name="month" id="select_month">
+            <option value="1">Января</option>
+            <option value="2">Февраля</option>
+            <option value="3">Марта</option>
+            <option value="4">Апреля</option>
+            <option value="5">Мая</option>
+            <option value="6">Июня</option>
+            <option value="7">Июля</option>
+            <option value="8">Августа</option>
+            <option value="9">Сентября</option>
+            <option value="10">Октября</option>
+            <option value="11">Ноября</option>
+            <option value="12">Декабря</option>
+          </select>
+          <select class="select-input" name="year" id="select_year"></select>
+        </div>
+        <button class="form-button" type="submit">Посчитать код</button>
+      </div>
+    </form>
+
+    <div class="result-financial" id="result_financial"></div>
+
+    <!-- Код Удачи и Реализации -->
+    <form id="luck-form" onsubmit="calculateLuckCode(event)">
+      <div class="form-container">
+        <div class="title-form">Код удачи и реализации</div>
+        <div>Введите имя и дату рождения</div>
+        <div class="select-container">
+          <input
+            class="text-input"
+            type="text"
+            name="name"
+            id="input_name"
+            placeholder="Введите имя"
+            required />
+          <select class="select-input" name="day" id="select_day_luck">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option>День</option>
+          </select>
+          <select class="select-input" name="month" id="select_month_luck">
+            <option value="1">Января</option>
+            <option value="2">Февраля</option>
+            <option value="3">Марта</option>
+            <option value="4">Апреля</option>
+            <option value="5">Мая</option>
+            <option value="6">Июня</option>
+            <option value="7">Июля</option>
+            <option value="8">Августа</option>
+            <option value="9">Сентября</option>
+            <option value="10">Октября</option>
+            <option value="11">Ноября</option>
+            <option value="12">Декабря</option>
+          </select>
+          <select
+            class="select-input"
+            name="year"
+            id="select_year_luck"></select>
+        </div>
+        <button class="form-button" type="submit">Посчитать код</button>
+        <div class="error-message" id="error_message"></div>
+      </div>
+    </form>
+
+    <div class="result-luck" id="result_luck"></div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const currentYear = new Date().getFullYear();
+        const selectYear = document.getElementById('select_year');
+        const selectYearLuck = document.getElementById('select_year_luck');
+
+        for (let year = 1920; year <= currentYear; year++) {
+          const option = document.createElement('option');
+          option.value = year;
+          option.textContent = year;
+          selectYear.appendChild(option);
+          selectYearLuck.appendChild(option.cloneNode(true));
+        }
+      });
+
+      function reduceToOneDigit(number) {
+        let sum = number
+          .toString()
+          .split('')
+          .reduce((acc, digit) => acc + parseInt(digit), 0);
+        while (sum > 9) {
+          sum = sum
+            .toString()
+            .split('')
+            .reduce((acc, digit) => acc + parseInt(digit), 0);
+        }
+        return sum;
+      }
+
+      function calculateFinancialCode(event) {
+        event.preventDefault();
+
+        const day = document.getElementById('select_day').value;
+        const month = document.getElementById('select_month').value;
+        const year = document.getElementById('select_year').value;
+
+        const daySum = reduceToOneDigit(day);
+        const monthSum = reduceToOneDigit(month);
+        const yearSum = reduceToOneDigit(
+          year.split('').reduce((acc, digit) => acc + parseInt(digit), 0),
+        );
+        const totalSum = reduceToOneDigit(daySum + monthSum + yearSum);
+
+        const resultContainer = document.getElementById('result_financial');
+        resultContainer.innerHTML = `
+      Ваш персональный финансовый код по дате рождения: ${daySum}${monthSum}${yearSum}${totalSum} 
+      <br>
+      <br>
+      КАК АКТИВИРОВАТЬ КОД? 
+      <br>
+      ⚜️ Использовать в качестве пароля для телефона. 
+      <br>
+      <br>
+      ⚜️ Использовать в качестве продолжения/вместо логина.
+      <br>
+      <br>
+      ⚜️ Использовать в качестве пин-кода банковской карты. 
+      <br>
+      <br>
+      ⚜️ Найти купюру, в номере которой есть такая же комбинация цифр, и хранить её в качестве талисмана. 
+      <br>
+      <br>
+      ⚜️ Написать красной ручкой код на однодолларовой купюре и поместить её в кошелёк
+    `;
+      }
+
+      function calculateLuckCode(event) {
+        event.preventDefault();
+
+        const day = document.getElementById('select_day_luck').value;
+        const month = document.getElementById('select_month_luck').value;
+        const year = document.getElementById('select_year_luck').value;
+        let name = document.getElementById('input_name').value.trim();
+
+        const errorMessage = document.getElementById('error_message');
+        errorMessage.textContent = '';
+
+        if (!isValidName(name)) {
+          errorMessage.textContent =
+            'Имя должно содержать только русские буквы, минимум две буквы, без цифр и пробелов.';
+          return;
+        }
+
+        name = capitalizeFirstLetter(name);
+
+        const totalSum = reduceToOneDigit(day + month + year);
+        const daySum = reduceToOneDigit(day);
+        const monthSum = reduceToOneDigit(month);
+        const combinedSum = reduceToOneDigit(daySum + monthSum);
+        const nameSum = reduceToOneDigit(translateNameToNumber(name));
+
+        const resultCodeText = `Ваш код удачи и реализации = ${totalSum}${daySum}${monthSum}${combinedSum}${nameSum}`;
+        const descriptionText = `<br>
+      <b>Обозначение цифр в коде удачи и реализации:</b>
+      <br>
+Самой важной является первая цифра!
+<br>
+<br>
+1 – число деятельности, активности и развития руководительских/управленческих навыков
+<br>
+<br>
+2 - число партнерства, когда хорошо работать в коллективе или в партнерстве с кем-то, коллектив – дом родной и семья
+<br>
+<br>
+3 – нужна обязательно социальная реализация, признание общества, выступайте, ведите блог, ораторствуйте
+<br>
+<br>
+4 – стабильность, лучше синица в руке, чем журавль в небе
+<br>
+<br>
+5 – легкость, коммуникации – ваш конёк
+<br>
+<br>
+6 – эстетика, дорого-богато, лучше одна вещь, но качественная, чем гора барахла
+<br><br>
+7 – отстаивать свою точку зрения, идти до конца
+<br><br>
+8 – труд – ваше кредо, только через упорный труд вы придете к результату
+<br><br>
+9 – активность во всем: в делах, семье, спорте. Главное – без импульса и необдуманных решений. Сначала думай - потом делай.
+<br>
+<br>
+<br>
+
+Активация кода:
+<br>
+<br>
+Трактуем /читаем значения цифр в коде, на что вам нужно обратить свое внимание
+<br>
+<br>
+Делаем амулет на 100 рублевой купюре (как показано в видео уроке).
+<br>
+<br>
+Если вы не из России, то берём самую ходовую купюру вашей страны!`;
+
+        const resultContainer = document.getElementById('result_luck');
+        resultContainer.innerHTML = resultCodeText + descriptionText;
+      }
+
+      function isValidName(name) {
+        const russianLettersRegex = /^[А-Яа-яЁё]+$/;
+        return russianLettersRegex.test(name) && name.length >= 2;
+      }
+
+      function capitalizeFirstLetter(name) {
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+      }
+
+      function translateNameToNumber(name) {
+        const letterToNumber = {
+          А: 1,
+          И: 1,
+          С: 1,
+          Ъ: 1,
+          Б: 2,
+          Й: 2,
+          Т: 2,
+          Ы: 2,
+          В: 3,
+          К: 3,
+          У: 3,
+          Ь: 3,
+          Г: 4,
+          Л: 4,
+          Ф: 4,
+          Э: 4,
+          Д: 5,
+          М: 5,
+          Х: 5,
+          Ю: 5,
+          Е: 6,
+          Н: 6,
+          Ц: 6,
+          Я: 6,
+          Ё: 7,
+          О: 7,
+          Ч: 7,
+          Ж: 8,
+          П: 8,
+          Ш: 8,
+        };
+
+        return name
+          .split('')
+          .reduce((acc, letter) => acc + (letterToNumber[letter] || 0), 0);
+      }
+    </script>
+  </body>
+</html>
